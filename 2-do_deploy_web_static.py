@@ -1,27 +1,33 @@
 #!/usr/bin/python3
-from fabric.api import local, run, env, put, sudo
-from datetime import datetime
-from os.path import exists
-env.hosts = ["35.196.176.123", "18.234.174.103"]
+# do_deploy of web static content
+
+from fabric.api import *
+from os import path
+
+env.hosts = ["34.74.163.244", "35.227.116.106"]
+env.user = "ubuntu"
 
 
 def do_deploy(archive_path):
-    """ Deploy archive! """
-    if exists(archive_path) is False:
+
+    if path.exists(archive_path) is False:
+        print("pass")
         return False
+
     try:
-        x = put(archive_path, "/tmp/")
-        name_file = archive_path.split("/")[1].split(".")[0]
-        uncompres = ("/data/web_static/releases/{}/".format(name_file))
-        run("sudo mkdir -p {}".format(uncompres))
-        run("sudo tar -zxf /tmp/{}.tgz -C {}".format(name_file, uncompres))
-        run("sudo rm /tmp/{}".format(archive_path.split("/")[1]))
-        run("sudo mv /data/web_static/releases/{}/web_static/*\
-        /data/web_static/releases/{}".format(name_file, name_file))
+        file_ = archive_path.split("/")[1]
+        filename = file_.split(".")[0]
+        put(archive_path, "/tmp/")
+        run("sudo mkdir -p /data/web_static/releases/" + filename)
+        run("sudo tar -zxf /tmp/{}.tgz -C {}".format(
+            filename, "/data/web_static/releases/" + filename))
+        run("sudo rm /tmp/{}".format(file_))
+        sudo('mv /data/web_static/releases/{}/web_static/* /data/web_static\
+/releases/{}'.format(filename, filename))
         run("sudo rm -rf /data/web_static/current")
         run("sudo ln -sf /data/web_static/releases/{}\
-        /data/web_static/current".format(name_file))
+        /data/web_static/current".format(filename))
         print("New version deployed!")
         return True
-    except Exception:
+    except:
         return False

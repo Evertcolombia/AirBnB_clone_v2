@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-from fabric.api import run
+# scritp to create source distribution tar archive from web_static folder
 from fabric.api import local
-import datetime
+from datetime import datetime
 
 
 def do_pack():
-    """ Compress before sending """
+    """ pack content to .gz file"""
     local("sudo mkdir -p versions")
-    date = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-    aux = ("versions/web_static_{}.tgz".format(date))
-    local("sudo tar -cvzf {} web_static".format(aux))
-    return aux
+    date_time = datetime.now().strftime("%Y%m%d%H%M%S")
+    name_file = "versions/web_static{}.tgz".format(date_time)
+    local("sudo tar -cvzf {} web_static".format(name_file))
+    return name_file
