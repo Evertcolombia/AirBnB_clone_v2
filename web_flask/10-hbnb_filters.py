@@ -6,6 +6,7 @@ from models.city import City
 from models.amenity import Amenity
 app = Flask(__name__)
 
+
 @app.route('/hbnb_filters', strict_slashes=False)
 def hbnb_filters():
     states = storage.all(State)
@@ -16,6 +17,7 @@ def hbnb_filters():
 @app.teardown_appcontext
 def teardown_appcontext_session(self):
     return storage.close()
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='5000')

@@ -2,6 +2,7 @@
 from flask import Flask
 app = Flask(__name__)
 
+
 @app.route('/', strict_slashes=False)
 def index():
     return "Hello HBNB!"
@@ -22,6 +23,7 @@ def python_route(text='is cool'):
 @app.route('/number/<int:n>', strict_slashes=False)
 def is_number_route(n):
     return "%s is a number" % n
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='5000')
