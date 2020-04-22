@@ -74,3 +74,10 @@ class DBStorage:
         Session = scoped_session(sessionmaker(bind=self.__engine,
                                               expire_on_commit=False))
         self.__session = Session()
+
+    def close(self):
+        """close method close from sqlalchemy
+           Close this Session.
+           This clears all items and ends any transaction in progress."""
+        #self.__session.close() 
+        Session.remove()

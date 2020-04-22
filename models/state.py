@@ -22,12 +22,11 @@ class State(BaseModel, Base):
 
         @property
         def cities(self):
-            """ get instances with the same id from
-            states mapped class
-            """
+            """return list of city objects from storage
+               lined to the current state in self"""
+            city_list = []
             cities = models.storage.all(City)
-            instance_list = []
-            for key in cities.values():
-                    if key.states.id == self.id:
-                        instance_list.append(v)
-            return instance_list
+            for city in cities.values():
+                if city.states_id == self.id:
+                    city_list.apend(city)
+            return city_list
