@@ -11,8 +11,9 @@ app = Flask(__name__)
 def hbnb_filters():
     states = storage.all(State)
     amenties = storage.all(Amenities)
-    return render_template('10-hbnb_filters.html',
-                            states=states, amenities=amenities)
+    tem ='10-hbnb_filters.html'
+    return render_template(tem, states=states, amenities=amenities)
+
 
 @app.teardown_appcontext
 def teardown_appcontext_session(self):

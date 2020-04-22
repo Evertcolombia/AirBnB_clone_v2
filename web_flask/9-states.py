@@ -13,7 +13,9 @@ def states(id=None):
         id = "State.{}".format(id)
     states = storage.all(State)
     cities = storage.all(City)
-    return render_template('9-states.html', states=states, cities=cities, id=id)
+    tem = '9-states.html'
+    return render_template(tem, states=states, cities=cities, id=id)
+
 
 @app.teardown_appcontext
 def teardown_context_session(self):
