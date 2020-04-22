@@ -79,5 +79,4 @@ class DBStorage:
         """close method close from sqlalchemy
            Close this Session.
            This clears all items and ends any transaction in progress."""
-        #self.__session.close() 
-        Session.remove()
+        self.__session.close() 
