@@ -46,8 +46,6 @@ class DBStorage:
                 for row in self.__session.query(aux_classes[rows]):
                     key = "{}.{}".format(row.__class__.__name__, row.id)
                     list_aux[key] = row
-        #if "_sa_instance_state" in list_aux:
-            #del list_aux['_sa_instance_state']
         return list_aux
 
     def new(self, obj):
@@ -80,4 +78,4 @@ class DBStorage:
         """close method close from sqlalchemy
            Close this Session.
            This clears all items and ends any transaction in progress."""
-        self.__session.close() 
+        self.__session.close()
