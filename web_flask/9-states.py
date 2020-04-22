@@ -1,17 +1,19 @@
 #!/usr/bin/python3
 from flask import Flask, render_template
-import models import storage
+from models import storage
 from models.state import State
 from models.city import City
 app = Flask(__name__)
 
 
 @app.route('/states', strict_slashes=False)
-@app.route('/states/<int:id>', strict_slashes=False)
+@app.route('/states/<id>', strict_slashes=False)
 def states(id=None):
+    if id is not None:
+        id = "State.{}".format(id)
     states = storage.all(State)
     cities = storage.all(City)
-    return render_template('9-states.html', states=states, cities=cities)
+    return render_template('9-states.html', states=states, cities=cities, id=id)
 
 @app.teardown_appcontext
 def teardown_context_session(self):
