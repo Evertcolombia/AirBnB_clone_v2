@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 from flask import Flask, render_template
-from models import storage,
+from models import storage
 from models.state import State
-from models.city import city
+from models.city import City
 app = Flask(__name__)
 
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 def cities_by_states():
        states = storage.all(State)
        cities = storage.all(City)
-       return template_render('8-cities_by_states.html',
+       return render_template('8-cities_by_states.html',
                                states=states, cities=cities)
 
 @app.teardown_appcontext
