@@ -37,7 +37,7 @@ class DBStorage:
         aux_classes = {'State': State, 'Place': Place, 'City': City,
                        'Amenity': Amenity, 'Review': Review, 'User': User}
         if cls:
-            for row in self.__session.query(aux_classes[cls.__name__]):
+            for row in self.__session.query(aux_classes[cls]):
                 key = "{}.{}".format(row.__class__.__name__, row.id)
                 list_aux[key] = row
         else:
